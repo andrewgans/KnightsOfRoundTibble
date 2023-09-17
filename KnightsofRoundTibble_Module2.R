@@ -96,7 +96,7 @@ standard.error <- function(x) {
   (sd(x)/(sqrt(length(x))))
   
 }
-##Question 3 + Question 4
+##Question 3 and Question 4
 pseed.sum.max <- pseed.wide %>%
   group_by(fish,bl.s) %>% 
   summarise(amp.sum.mean = max(amp.sum),
