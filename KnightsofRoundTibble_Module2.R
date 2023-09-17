@@ -119,4 +119,4 @@ pseed.sum.max %>%
   ggplot(aes(x=amp.sum.mean, y=met.rate))+
   geom_point() +
   labs(x = "Mean Maximum Amplitude", y = "Metabolic Rate")
-###
+### 
