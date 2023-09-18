@@ -20,24 +20,6 @@ pseed2 <- pseed2%>%
 pseed2 <- pseed2%>%
   mutate(bl.s=cm.s/bl)%>%
   print()
-#Plot fin amplitudes over specific speeds
-pseed2%>%
-  ggplot(aes(x=bl.s,y=amp.bl))+geom_point(alpha=0.01)
-#Left fin amplitude for a specific date
-pseed2%>%
-  filter(date=="2019-06-17-151149", fin=="L")%>%
-  ggplot(aes(x=frame,y=amp.bl))+geom_point()
-#Custom functions
-exp1 <- pseed2%>%
-  filter(date=="2019-06-17-151149", fin=="L")
-
-f1 <-  features(x = exp1$frame,y=exp1$amp.bl)->f1
-f1
-fget(f1)
-#plot vertical lines at
-pseed2%>%
-  filter(date=="2019-06-17-151149", fin=="L")%>%
-  ggplot(aes(x=frame,y=amp.bl))+geom_point()+geom_vline(xintercept = fget(f1)$crit.pts)
 ##multiply fget curvature values to avoid rounding to zero
 f2 <-  features(x = exp1$frame,y=exp1$amp.bl*100)
 fget(f2)
@@ -70,9 +52,7 @@ pseed.max <- pseed2%>%
   group_by(date,fin)%>%
   mutate(peak=frame %in% find.peaks(frame,amp.bl))%>%
   filter(peak==T) #new filter
-pseed.max
-pseed.max%>%
-  ggplot(aes(x=bl.s,y=amp.bl))+geom_point()+geom_smooth(method="lm")
+
 #ANOVA 
 amp.aov <-  aov(amp.bl~bl.s,pseed.max)
 summary(amp.aov)
